@@ -28,7 +28,7 @@ function LoginFacebook(){
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             alert("Usuário Ja esta logado no Facebook!");
-            Linking(user);
+            Linking(response.authResponse);
         } else if (response.status === 'not_authorized') {
             alert("Usuário logado no Sistema porem não atenticado no sistema!")
         } else {
