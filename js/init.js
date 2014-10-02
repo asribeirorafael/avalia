@@ -28,44 +28,39 @@ function LoginFacebook(){
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             alert("Usuário Ja esta logado no Facebook!");
-            Linking();
         } else if (response.status === 'not_authorized') {
             alert("Usuário logado no Sistema porem não atenticado no sistema!")
         } else {
             // the user isn't logged in to Facebook.
-            Parse.FacebookUtils.logIn(null, {
-                success: function(user) {
-                    console.log(user);
-                    if (!user.existed()) {
-                        alert("Usuário registrado e autenticado através do Facebook!");
-                        Linking();
-                    } else {
-                        alert("Usuário conectado através do Facebook!");
+//            Parse.FacebookUtils.logIn(null, {
+//                success: function(user) {
+//                    console.log(user);
+//                    if (!user.existed()) {
+//                        alert("Usuário registrado e autenticado através do Facebook!");
+//                        Linking();
+//                    } else {
+//                        alert("Usuário conectado através do Facebook!");
+//                    }
+//                },
+//                error: function(user, error) {
+//                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
+//                }
+//            });
+            if (!Parse.FacebookUtils.isLinked(user)) {
+                Parse.FacebookUtils.link(Parse.User.current(), null, {
+                    success: function (user) {
+                        console.log(user);
+                        alert("Woohoo, usuário logado no Facebook!");
+                    },
+                    error: function (user, error) {
+                        alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
                     }
-                },
-                error: function(user, error) {
-                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
-                }
-            });
+                });
+            }
         }
     });
 
 
-}
-
-function Linking(){
-    var usuario = Parse.User.current();
-
-    if (!Parse.FacebookUtils.isLinked(usuario)) {
-        Parse.FacebookUtils.link(Parse.User.current(), null, {
-            success: function(user) {
-                alert("Woohoo, user logged in with Facebook!");
-            },
-            error: function(user, error) {
-                alert("User cancelled the Facebook login or did not fully authorize.");
-            }
-        });
-    }
 }
 
 function UnLinking(user){
