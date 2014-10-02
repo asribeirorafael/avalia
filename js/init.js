@@ -13,7 +13,7 @@ window.fbAsyncInit = function() {
         version    : 'v2.1'
     });
 
-    Parse.FacebookUtils.logIn("user_likes,email", {
+    Parse.FacebookUtils.logIn(null, {
         success: function(user) {
             console.log(user);
             if (!user.existed()) {
@@ -23,7 +23,6 @@ window.fbAsyncInit = function() {
             }
         },
         error: function(user, error) {
-            console.log(user);
             alert("User cancelled the Facebook login or did not fully authorize.");
         }
     });
