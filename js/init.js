@@ -25,13 +25,13 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function LoginFacebook(){
-    FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            alert("Usuário Ja esta logado no Facebook!");
-        } else if (response.status === 'not_authorized') {
-            alert("Usuário logado no Sistema porem não atenticado no sistema!")
-        } else {
-            // the user isn't logged in to Facebook.
+//    FB.getLoginStatus(function(response) {
+//        if (response.status === 'connected') {
+//            alert("Usuário Ja esta logado no Facebook!");
+//        } else if (response.status === 'not_authorized') {
+//            alert("Usuário logado no Sistema porem não atenticado no sistema!")
+//        } else {
+    // the user isn't logged in to Facebook.
 //            Parse.FacebookUtils.logIn(null, {
 //                success: function(user) {
 //                    console.log(user);
@@ -46,19 +46,19 @@ function LoginFacebook(){
 //                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
 //                }
 //            });
-            if (!Parse.FacebookUtils.isLinked(user)) {
-                Parse.FacebookUtils.link(Parse.User.current(), null, {
-                    success: function (user) {
-                        console.log(user);
-                        alert("Woohoo, usuário logado no Facebook!");
-                    },
-                    error: function (user, error) {
-                        alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
-                    }
-                });
+    if (!Parse.FacebookUtils.isLinked(user)) {
+        Parse.FacebookUtils.link(Parse.User.current(), null, {
+            success: function (user) {
+                console.log(user);
+                alert("Woohoo, usuário logado no Facebook!");
+            },
+            error: function (user, error) {
+                alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
             }
-        }
-    });
+        });
+    }
+//        }
+//    });
 
 
 }
