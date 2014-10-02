@@ -23,6 +23,7 @@ window.fbAsyncInit = function() {
             }
         },
         error: function(user, error) {
+            console.log(user);
             alert("User cancelled the Facebook login or did not fully authorize.");
         }
     });
