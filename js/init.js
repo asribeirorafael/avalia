@@ -45,8 +45,8 @@ function LoginFacebook(){
 //                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
 //                }
 //            });
-    if (!Parse.FacebookUtils.isLinked(Parse.User.current())) {
-        Parse.FacebookUtils.link(Parse.User.current(), null, {
+    if (!Parse.FacebookUtils.isLinked(Parse.User)) {
+        Parse.FacebookUtils.link(Parse.User, null, {
             success: function (user) {
                 console.log(user);
                 alert("Woohoo, usuário logado no Facebook!");
