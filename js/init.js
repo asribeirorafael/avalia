@@ -7,10 +7,9 @@ Parse.initialize("LOhTWWFFtKEhzuBpX9IOQKzXQvN0d2fOW4zfamRs", "0mlWdmo9HQdeoAkDCz
 window.fbAsyncInit = function() {
     Parse.FacebookUtils.init({
         appId      : '361738637322502',
-        status     : false, // check Facebook Login status
+        status     : true, // check Facebook Login status
         cookie     : true, // enable cookies to allow Parse to access the session
-        xfbml      : true,
-        version    : 'v2.1'
+        xfbml      : true
     });
 
     // Run code after the Facebook SDK is loaded.
@@ -25,40 +24,31 @@ window.fbAsyncInit = function() {
 }(document, 'script', 'facebook-jssdk'));
 
 function LoginFacebook(){
-//    FB.getLoginStatus(function(response) {
-//        if (response.status === 'connected') {
-//            alert("Usuário Ja esta logado no Facebook!");
-//        } else if (response.status === 'not_authorized') {
-//            alert("Usuário logado no Sistema porem não atenticado no sistema!")
-//        } else {
-    // the user isn't logged in to Facebook.
-//            Parse.FacebookUtils.logIn(null, {
-//                success: function(user) {
-//                    console.log(user);
-//                    if (!user.existed()) {
-//                        alert("Usuário registrado e autenticado através do Facebook!");
-//                    } else {
-//                        alert("Usuário conectado através do Facebook!");
-//                    }
-//                },
-//                error: function(user, error) {
-//                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
-//                }
-//            });
-//    if (!Parse.FacebookUtils.isLinked(Parse.User)) {
-        Parse.FacebookUtils.link(Parse.User, null, {
-            success: function (user) {
-                console.log(user);
-                alert("Woohoo, usuário logado no Facebook!");
+    var username = "default_exla";
+    var password = "123456";
+
+    if(!Parse.User.getSessionToken()){
+        Parse.User.Login(username,password, {
+            success: function(user) {
+                alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
+                if (!Parse.FacebookUtils.isLinked(user)) {
+                    Parse.FacebookUtils.link(user, null, {
+                        success: function(user) {
+                            alert("Acesso por Facebook Liberado.");
+                        },
+                        error: function(user, error) {
+                            alert("Acesso Negado para o Usuário do Facebook.");
+                        }
+                    });
+                }
             },
-            error: function (user, error) {
-                alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
+            error: function(user, error) {
+                alert("Você não possui acesso ao sistema.");
             }
         });
-//    }
-//        }
-//    });
-
+    }else{
+        alert("Usuário com sessão ativa no sistema, continuando!");
+    }
 
 }
 
