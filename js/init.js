@@ -23,7 +23,7 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function LoginFacebook(){
+function LoginParse(){
     var username = "default_exla";
     var password = "123456";
 
@@ -47,15 +47,12 @@ function LoginFacebook(){
             }
         });
     }else{
-        alert("Usuário com sessão ativa no sistema, continuando!");
+        alert("Usuário com sessão ativa no sistema, continuando.");
     }
 
 }
 
-function UnLinking(user){
-    Parse.FacebookUtils.unlink(Parse.User.current(), {
-        success: function(user) {
-            alert("The user is no longer associated with their Facebook account.");
-        }
-    });
+function LogoutParse(user){
+    Parse.User.logOut();
+    alert("Usuário desconectado do Sistema.")
 }
