@@ -37,7 +37,6 @@ function LoginFacebook(){
 //                    console.log(user);
 //                    if (!user.existed()) {
 //                        alert("Usuário registrado e autenticado através do Facebook!");
-//                        Linking();
 //                    } else {
 //                        alert("Usuário conectado através do Facebook!");
 //                    }
@@ -46,7 +45,7 @@ function LoginFacebook(){
 //                    alert("O usuário cancelou o login do Facebook ou não autorizou totalmente.");
 //                }
 //            });
-    if (!Parse.FacebookUtils.isLinked(user)) {
+    if (!Parse.FacebookUtils.isLinked(Parse.User.current())) {
         Parse.FacebookUtils.link(Parse.User.current(), null, {
             success: function (user) {
                 console.log(user);
