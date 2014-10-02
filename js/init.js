@@ -54,27 +54,22 @@ function LoginFacebook(){
 }
 
 function Linking(){
-    FB.api('/me', function(user) {
-        if (!Parse.FacebookUtils.isLinked(user)) {
-            Parse.FacebookUtils.link(user, null, {
-                success: function(user) {
-                    alert("Woohoo, user logged in with Facebook!");
-                },
-                error: function(user, error) {
-                    alert("User cancelled the Facebook login or did not fully authorize.");
-                }
-            });
-        }
-    });
-
+    if (!Parse.FacebookUtils.isLinked(Parse.User.current())) {
+        Parse.FacebookUtils.link(Parse.User.current(), null, {
+            success: function(user) {
+                alert("Woohoo, user logged in with Facebook!");
+            },
+            error: function(user, error) {
+                alert("User cancelled the Facebook login or did not fully authorize.");
+            }
+        });
+    }
 }
 
 function UnLinking(user){
-    FB.api('/me', function(user) {
-        Parse.FacebookUtils.unlink(user, {
-            success: function(user) {
-                alert("The user is no longer associated with their Facebook account.");
-            }
-        });
+    Parse.FacebookUtils.unlink(Parse.User.current(), {
+        success: function(user) {
+            alert("The user is no longer associated with their Facebook account.");
+        }
     });
 }
