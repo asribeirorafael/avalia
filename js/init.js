@@ -28,7 +28,7 @@ function LoginFacebook(){
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
             alert("Usuário Ja esta logado no Facebook!");
-            Linking(null);
+            Linking();
         } else if (response.status === 'not_authorized') {
             alert("Usuário logado no Sistema porem não atenticado no sistema!")
         } else {
@@ -38,7 +38,7 @@ function LoginFacebook(){
                     console.log(user);
                     if (!user.existed()) {
                         alert("Usuário registrado e autenticado através do Facebook!");
-                        Linking(user);
+                        Linking();
                     } else {
                         alert("Usuário conectado através do Facebook!");
                     }
@@ -53,9 +53,8 @@ function LoginFacebook(){
 
 }
 
-function Linking(user){
-    FB.api('/me', function(response) {
-        alert('Your name is ' + response.name);
+function Linking(){
+    FB.api('/me', function(user) {
         if (!Parse.FacebookUtils.isLinked(user)) {
             Parse.FacebookUtils.link(user, null, {
                 success: function(user) {
@@ -71,9 +70,11 @@ function Linking(user){
 }
 
 function UnLinking(user){
-    Parse.FacebookUtils.unlink(user, {
-        success: function(user) {
-            alert("The user is no longer associated with their Facebook account.");
-        }
+    FB.api('/me', function(user) {
+        Parse.FacebookUtils.unlink(user, {
+            success: function(user) {
+                alert("The user is no longer associated with their Facebook account.");
+            }
+        });
     });
 }
