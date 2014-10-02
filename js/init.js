@@ -28,23 +28,24 @@ function LoginFacebook(){
     var password = "123456";
 
     if(!Parse.User.current()){
-        Parse.User.Login(username,password, {
-            success: function(user) {
-                alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
-                if (!Parse.FacebookUtils.isLinked(user)) {
-                    Parse.FacebookUtils.link(user, null, {
-                        success: function(user) {
-                            alert("Acesso por Facebook Liberado.");
-                        },
-                        error: function(user, error) {
-                            alert("Acesso Negado para o Usuário do Facebook.");
-                        }
-                    });
-                }
-            },
-            error: function(user, error) {
-                alert("Você não possui acesso ao sistema.");
-            }
+        Parse.User.Login(username,password, function(options){
+//            success: function() {
+//                alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
+//                if (!Parse.FacebookUtils.isLinked(user)) {
+//                    Parse.FacebookUtils.link(user, null, {
+//                        success: function(user) {
+//                            alert("Acesso por Facebook Liberado.");
+//                        },
+//                        error: function(user, error) {
+//                            alert("Acesso Negado para o Usuário do Facebook.");
+//                        }
+//                    });
+//                }
+//            },
+//            error: function(user, error) {
+//                alert("Você não possui acesso ao sistema.");
+//            }
+            console.log(options);
         });
     }else{
         alert("Usuário com sessão ativa no sistema, continuando!");
