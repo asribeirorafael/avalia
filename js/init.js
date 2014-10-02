@@ -13,20 +13,6 @@ window.fbAsyncInit = function() {
         version    : 'v2.1'
     });
 
-    Parse.FacebookUtils.logIn(null, {
-        success: function(user) {
-            console.log(user);
-            if (!user.existed()) {
-                alert("User signed up and logged in through Facebook!");
-            } else {
-                alert("User logged in through Facebook!");
-            }
-        },
-        error: function(user, error) {
-            alert("User cancelled the Facebook login or did not fully authorize.");
-        }
-    });
-
     // Run code after the Facebook SDK is loaded.
 };
 
@@ -38,18 +24,36 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-//function LoginFacebook(){
-//    Parse.FacebookUtils.logIn(null, {
-//        success: function(user) {
-//            console.log(user);
-//            if (!user.existed()) {
-//                alert("User signed up and logged in through Facebook!");
-//            } else {
-//                alert("User logged in through Facebook!");
-//            }
-//        },
-//        error: function(user, error) {
-//            alert("User cancelled the Facebook login or did not fully authorize.");
-//        }
-//    });
-//}
+function LoginFacebook(){
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            // the user is logged in and has authenticated your
+            // app, and response.authResponse supplies
+            // the user's ID, a valid access token, a signed
+            // request, and the time the access token
+            // and signed request each expire
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+        } else if (response.status === 'not_authorized') {
+            // the user is logged in to Facebook,
+            // but has not authenticated your app
+        } else {
+            // the user isn't logged in to Facebook.
+            Parse.FacebookUtils.logIn(null, {
+                success: function(user) {
+                    console.log(user);
+                    if (!user.existed()) {
+                        alert("User signed up and logged in through Facebook!");
+                    } else {
+                        alert("User logged in through Facebook!");
+                    }
+                },
+                error: function(user, error) {
+                    alert("User cancelled the Facebook login or did not fully authorize.");
+                }
+            });
+        }
+    });
+
+
+}
