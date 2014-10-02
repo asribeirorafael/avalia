@@ -24,8 +24,9 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-Parse.FacebookUtils.logIn(null, {
+Parse.FacebookUtils.logIn("user_likes,email", {
     success: function(user) {
+        console.log(user);
         if (!user.existed()) {
             alert("User signed up and logged in through Facebook!");
         } else {
