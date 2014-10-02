@@ -54,7 +54,9 @@ function LoginFacebook(){
 }
 
 function Linking(){
-    if (!Parse.FacebookUtils.isLinked(Parse.User.current())) {
+    var usuario = Parse.User.current();
+
+    if (!Parse.FacebookUtils.isLinked(usuario)) {
         Parse.FacebookUtils.link(Parse.User.current(), null, {
             success: function(user) {
                 alert("Woohoo, user logged in with Facebook!");
