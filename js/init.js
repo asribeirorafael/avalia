@@ -2,12 +2,31 @@
  * Created by rafae_000 on 02/10/2014.
  */
 
+Parse.initialize("LOhTWWFFtKEhzuBpX9IOQKzXQvN0d2fOW4zfamRs", "0mlWdmo9HQdeoAkDCzDKx0RJirGxloMAdH7cEggr");
+
 window.fbAsyncInit = function() {
-    FB.init({
+    Parse.FacebookUtils.init({
         appId      : '361738637322502',
+        status     : true, // check Facebook Login status
+        cookie     : true, // enable cookies to allow Parse to access the session
         xfbml      : true,
         version    : 'v2.1'
     });
+
+    Parse.FacebookUtils.logIn(null, {
+        success: function(user) {
+            if (!user.existed()) {
+                alert("User signed up and logged in through Facebook!");
+            } else {
+                alert("User logged in through Facebook!");
+            }
+        },
+        error: function(user, error) {
+            alert("User cancelled the Facebook login or did not fully authorize.");
+        }
+    });
+
+    // Run code after the Facebook SDK is loaded.
 };
 
 (function(d, s, id){
