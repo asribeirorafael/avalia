@@ -27,7 +27,7 @@ function LoginFacebook(){
     var username = "default_exla";
     var password = "123456";
 
-    if(!Parse.User.getSessionToken()){
+    if(!getSessionToken()){
         Parse.User.Login(username,password, {
             success: function(user) {
                 alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
