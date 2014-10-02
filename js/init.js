@@ -28,7 +28,7 @@ function LoginFacebook(){
     var password = "123456";
 
     if(!Parse.User.current()){
-        Parse.User.Login(username,password, function(options){
+        Parse.User.logIn(username,password, function(options){
 //            success: function() {
 //                alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
 //                if (!Parse.FacebookUtils.isLinked(user)) {
