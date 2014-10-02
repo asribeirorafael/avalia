@@ -27,29 +27,22 @@ window.fbAsyncInit = function() {
 function LoginFacebook(){
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
-            // the user is logged in and has authenticated your
-            // app, and response.authResponse supplies
-            // the user's ID, a valid access token, a signed
-            // request, and the time the access token
-            // and signed request each expire
-            var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
+            alert("Usuário Ja esta logado no Facebook!");
         } else if (response.status === 'not_authorized') {
-            // the user is logged in to Facebook,
-            // but has not authenticated your app
+            alert("Usuário logado no Sistema porem não atenticado no sistema!")
         } else {
             // the user isn't logged in to Facebook.
             Parse.FacebookUtils.logIn(null, {
                 success: function(user) {
                     console.log(user);
                     if (!user.existed()) {
-                        alert("User signed up and logged in through Facebook!");
+                        alert("Usuário registrado e autenticado através do Facebook!");
                     } else {
-                        alert("User logged in through Facebook!");
+                        alert("Usuário conectado através do Facebook!");
                     }
                 },
                 error: function(user, error) {
-                    alert("User cancelled the Facebook login or did not fully authorize.");
+                    alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
                 }
             });
         }
