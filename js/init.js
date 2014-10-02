@@ -13,19 +13,6 @@ window.fbAsyncInit = function() {
         version    : 'v2.1'
     });
 
-    Parse.FacebookUtils.logIn(null, {
-        success: function(user) {
-            if (!user.existed()) {
-                alert("User signed up and logged in through Facebook!");
-            } else {
-                alert("User logged in through Facebook!");
-            }
-        },
-        error: function(user, error) {
-            alert("User cancelled the Facebook login or did not fully authorize.");
-        }
-    });
-
     // Run code after the Facebook SDK is loaded.
 };
 
@@ -36,3 +23,16 @@ window.fbAsyncInit = function() {
     js.src = "//connect.facebook.net/pt_BR/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
+
+Parse.FacebookUtils.logIn(null, {
+    success: function(user) {
+        if (!user.existed()) {
+            alert("User signed up and logged in through Facebook!");
+        } else {
+            alert("User logged in through Facebook!");
+        }
+    },
+    error: function(user, error) {
+        alert("User cancelled the Facebook login or did not fully authorize.");
+    }
+});
