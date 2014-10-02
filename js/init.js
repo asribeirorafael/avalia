@@ -13,18 +13,6 @@ window.fbAsyncInit = function() {
         version    : 'v2.1'
     });
 
-    // Run code after the Facebook SDK is loaded.
-};
-
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/pt_BR/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-function LoginFacebook(){
     Parse.FacebookUtils.logIn(null, {
         success: function(user) {
             console.log(user);
@@ -38,4 +26,30 @@ function LoginFacebook(){
             alert("User cancelled the Facebook login or did not fully authorize.");
         }
     });
-}
+
+    // Run code after the Facebook SDK is loaded.
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+//function LoginFacebook(){
+//    Parse.FacebookUtils.logIn(null, {
+//        success: function(user) {
+//            console.log(user);
+//            if (!user.existed()) {
+//                alert("User signed up and logged in through Facebook!");
+//            } else {
+//                alert("User logged in through Facebook!");
+//            }
+//        },
+//        error: function(user, error) {
+//            alert("User cancelled the Facebook login or did not fully authorize.");
+//        }
+//    });
+//}
