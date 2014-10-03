@@ -49,6 +49,8 @@ function LoginFacebookParse(){
                 success: function(user) {
                     if (!user.existed()) {
                         alert("Usuário cadastrado e logado através do FACEBOOK!");
+                        jQuery("#btsnLogin").css("display","none");
+                        jQuery("#cadastro").css("display","block");
                     } else {
                         alert("Usuário conectado através do FACEBOOK!");
                     }
@@ -64,6 +66,8 @@ function LoginFacebookParse(){
                 success: function(user) {
                     if (!user.existed()) {
                         alert("Usuário cadastrado e logado através do FACEBOOK!");
+                        jQuery("#btsnLogin").css("display","none");
+                        jQuery("#cadastro").css("display","block");
                     } else {
                         alert("Usuário conectado através do FACEBOOK!");
                     }
@@ -78,5 +82,28 @@ function LoginFacebookParse(){
 
 function LogoutParse(user){
     Parse.User.logOut();
+    jQuery("#btsnLogin").css("display","block");
+    jQuery("#cadastro").css("display","none");
     alert("Usuário desconectado do Sistema.")
+}
+
+function salvarDado(){
+    var Game = Parse.Object.extend("Games");
+    var game = new Game();
+
+    game.set("nome", jQuery("#valNG").val);
+    game.set("valor", jQuery("#valVL").val);
+    game.set("faixa_etaria", jQuery("#valFE").val);
+
+    game.save(null, {
+        success: function(gameScore) {
+            // Execute any logic that should take place after the object is saved.
+            alert('New object created with objectId: ' + gameScore.id);
+        },
+        error: function(gameScore, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and message.
+            alert('Failed to create new object, with error code: ' + error.message);
+        }
+    });
 }

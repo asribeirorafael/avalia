@@ -17,7 +17,7 @@
 <div id="fb-root"></div>
 
 <!--<div onclick="LoginFacebook()" class="fb-login-button" data-max-rows="2" data-size="xlarge" data-show-faces="false" data-auto-logout-link="true"></div>-->
-<div>
+<div id="btsnLogin" style="display:block;">
 
     <div>
         <input type="button" value="Log In" onclick="LoginSimpleParse()"/>
@@ -25,13 +25,33 @@
     <div>
         <input type="button" value="Sign In Facebook" onclick="LoginFacebookParse()"/>
     </div>
-    <div>
-        <input type="button" value="Logout" onclick="LogoutParse()"/>
-    </div>
 
 </div>
 
+<div id="cadastro" style="display:block;">
+    <br>
+    <br>
+    <div>
+        <label>Nome do Game</label>
+        <input type="txt" value="" id="valNG"/>
+    </div>
+    <div>
+        <label>Valor</label>
+        <input type="txt" value="" id="valVL"/>
+    </div>
+    <div>
+        <label>Faixa Etaria</label>
+        <input type="txt" value="" id="valFE"/>
+    </div>
+    <br>
+    <div>
+        <input type="button" value="Salvar" onclick="salvarDado()"/>
+    </div>
+</div>
 
+<div>
+    <input type="button" value="Logout" onclick="LogoutParse()"/>
+</div>
 
 </body>
 
