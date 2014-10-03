@@ -24,6 +24,67 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+function adicionarRole(){
+    // By specifying no write privileges for the ACL, we can ensure the role cannot be altered.
+    var roleACL = new Parse.ACL();
+    roleACL.setPublicReadAccess(true);
+    roleACL.setPublicWriteAccess(true)
+    var role = new Parse.Role("Administrador", roleACL);
+    role.save();
+
+    var roleACL2 = new Parse.ACL();
+    roleACL2.setPublicReadAccess(true);
+    var role2 = new Parse.Role("Leitor", roleACL2);
+    role2.save();
+}
+
+function adicionarUserInRoles(){
+    var User = Parse.Object.extend("User");
+    var Role = Parse.Object.extend("Role");
+
+    var queryUser = new Parse.Query(User);
+    var queryRole = new Parse.Query(Role);
+
+    queryRole.get("", {
+        success: function(role){
+            queryUser.get("CrFOdyEGIO", {
+                success: function(user) {
+                    var role = new Parse.Role(user, roleACL);
+                    role.getUsers().add(usersToAddToRole);
+                    role.getRoles().add(rolesToAddToRole);
+                    role.save();
+                },
+                error: function(object, error) {
+                    alert("Retorno de Usuário com Problemas!");
+                }
+            });
+        },
+        error: function(object, error){
+            alert("Retorno de Role com Problemas!");
+        }
+    });
+
+    queryRole.get("", {
+        success: function(role){
+            queryUser.get("ihIMmAHDBT", {
+                success: function(user) {
+                    var role = new Parse.Role(user, roleACL);
+                    role.getUsers().add(usersToAddToRole);
+                    role.getRoles().add(rolesToAddToRole);
+                    role.save();
+                },
+                error: function(object, error) {
+                    alert("Retorno de Usuário com Problemas!");
+                }
+            });
+        },
+        error: function(object, error){
+            alert("Retorno de Role com Problemas!");
+        }
+    });
+}
+
+
 function LoginSimpleParse(){
     var username = "default_exla";
     var password = "123456";
@@ -76,6 +137,7 @@ function LogoutParse(user){
     jQuery("#cadastro").css("display","none");
     alert("Usuário desconectado do Sistema.")
 }
+
 
 function salvarDado(){
     var Game = Parse.Object.extend("Games");
