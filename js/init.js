@@ -41,17 +41,18 @@ function adicionarRole(){
 function adicionarUserInRoles(){
     var User = Parse.Object.extend("User");
     var Role = Parse.Object.extend("Role");
+    var roleACL = new Parse.ACL();
 
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
 
-    queryRole.get("", {
+    queryRole.get("O5kKhpm366", {
         success: function(role){
             queryUser.get("CrFOdyEGIO", {
                 success: function(user) {
-                    var role = new Parse.Role(user, roleACL);
-                    role.getUsers().add(usersToAddToRole);
-                    role.getRoles().add(rolesToAddToRole);
+                    var role = new Parse.Role("Leitor", roleACL);
+                    role.getUsers().add(user);
+                    role.getRoles().add(role);
                     role.save();
                 },
                 error: function(object, error) {
@@ -64,13 +65,13 @@ function adicionarUserInRoles(){
         }
     });
 
-    queryRole.get("", {
+    queryRole.get("4pPDhFoo9R", {
         success: function(role){
             queryUser.get("ihIMmAHDBT", {
                 success: function(user) {
-                    var role = new Parse.Role(user, roleACL);
-                    role.getUsers().add(usersToAddToRole);
-                    role.getRoles().add(rolesToAddToRole);
+                    var role = new Parse.Role("Administrador", roleACL);
+                    role.getUsers().add(user);
+                    role.getRoles().add(role);
                     role.save();
                 },
                 error: function(object, error) {
