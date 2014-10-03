@@ -81,9 +81,13 @@ function salvarDado(){
     var Game = Parse.Object.extend("Games");
     var game = new Game();
 
-    game.set("nome", jQuery("#valNG").val);
-    game.set("valor", jQuery("#valVL").val);
-    game.set("faixa_etaria", jQuery("#valFE").val);
+    var N = jQuery("#valNG").val;
+    var V = jQuery("#valVL").val;
+    var FE = jQuery("#valFE").val;
+
+    game.set("nome", N);
+    game.set("valor", V);
+    game.set("faixa_etaria", FE);
 
     game.save(null, {
         success: function(gameScore) {
