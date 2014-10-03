@@ -43,27 +43,28 @@ function adicionarUserInRoles(){
     var Role = Parse.Object.extend("Role");
 
     var queryUser = new Parse.Query(User);
-    var queryRole = new Parse.Query(Role);
+//    var queryRole = new Parse.Query(Role);
 
-    queryRole.get("fMiCwlZw65", {
-        success: function(roleR){
+//    queryRole.get("fMiCwlZw65", {
+//        success: function(roleR){
             queryUser.get("CrFOdyEGIO", {
                 success: function(user) {
                     var roleACL = new Parse.ACL();
                     var role = new Parse.Role("Leitor", roleACL);
                     role.getUsers().add(user);
-                    role.getRoles().add(roleR);
+                    role.getRoles().add(Parse.Role("Leitor"));
                     role.save();
+                    alert("Salvo com Sucesso!");
                 },
                 error: function(object, error) {
                     alert("Retorno de Usuário com Problemas!");
                 }
             });
-        },
-        error: function(object, error){
-            alert("Retorno de Role com Problemas!");
-        }
-    });
+//        },
+//        error: function(object, error){
+//            alert("Retorno de Role com Problemas!");
+//        }
+//    });
 
 //    queryRole.get("4pPDhFoo9R", {
 //        success: function(roleR){
