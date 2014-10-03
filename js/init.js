@@ -47,7 +47,7 @@ function adicionarUserInRoles(){
 
 //    queryRole.get("fMiCwlZw65", {
 //        success: function(roleR){
-            queryUser.get("CrFOdyEGIO", {
+            queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
                     var roleACL = new Parse.ACL();
                     var role = new Parse.Role("Leitor", roleACL);
