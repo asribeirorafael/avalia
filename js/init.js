@@ -30,7 +30,8 @@ function LoginSimpleParse(){
     if(!Parse.User.current()){
         Parse.User.logIn(username,password, {
             success: function(user) {
-                alert("Estamos logados via PARSE!");
+                jQuery("#btsnLogin").css("display","none");
+                jQuery("#cadastro").css("display","block");
             },
             error: function(user, error) {
                 alert("Você não possui acesso ao sistema.");
@@ -48,7 +49,6 @@ function LoginFacebookParse(){
             Parse.FacebookUtils.logIn(null, {
                 success: function(user) {
                     if (!user.existed()) {
-                        alert("Usuário cadastrado e logado através do FACEBOOK!");
                         jQuery("#btsnLogin").css("display","none");
                         jQuery("#cadastro").css("display","block");
                     } else {
@@ -65,7 +65,6 @@ function LoginFacebookParse(){
             Parse.FacebookUtils.logIn(null, {
                 success: function(user) {
                     if (!user.existed()) {
-                        alert("Usuário cadastrado e logado através do FACEBOOK!");
                         jQuery("#btsnLogin").css("display","none");
                         jQuery("#cadastro").css("display","block");
                     } else {
