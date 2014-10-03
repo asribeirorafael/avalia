@@ -52,7 +52,7 @@ function adicionarUserInRoles(){
                     var roleACL = new Parse.ACL();
                     var role = new Parse.Role("Leitor", roleACL);
                     role.getUsers().add(user);
-                    role.getRoles().add(new Parse.Role("Leitor", roleACL));
+                    role.getRoles().add(Parse.Role("Leitor", roleACL));
                     role.save();
                     alert("Salvo com Sucesso!");
                 },
