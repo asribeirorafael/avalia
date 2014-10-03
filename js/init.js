@@ -41,7 +41,6 @@ function adicionarRole(){
 function adicionarUserInRoles(){
     var User = Parse.Object.extend("User");
     var Role = Parse.Object.extend("Role");
-    var roleACL = new Parse.ACL();
 
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
@@ -50,6 +49,7 @@ function adicionarUserInRoles(){
         success: function(roleR){
             queryUser.get("CrFOdyEGIO", {
                 success: function(user) {
+                    var roleACL = new Parse.ACL();
                     var role = new Parse.Role("Leitor", roleACL);
                     role.getUsers().add(user);
                     role.getRoles().add(roleR);
