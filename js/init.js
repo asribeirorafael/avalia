@@ -81,9 +81,9 @@ function salvarDado(){
     var Game = Parse.Object.extend("Games");
     var game = new Game();
 
-    var N = jQuery("#valNG").val;
-    var V = jQuery("#valVL").val;
-    var FE = jQuery("#valFE").val;
+    var N = jQuery("#valNG").value;
+    var V = jQuery("#valVL").value;
+    var FE = jQuery("#valFE").value;
 
     game.set("nome", N);
     game.set("valor", V);
