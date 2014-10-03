@@ -45,6 +45,18 @@ function LoginFacebookParse(){
     FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
            alert("Usuário ja está logado no Sistema via FACEBOOK.");
+            Parse.FacebookUtils.logIn(null, {
+                success: function(user) {
+                    if (!user.existed()) {
+                        alert("Usuário cadastrado e logado através do FACEBOOK!");
+                    } else {
+                        alert("Usuário conectado através do FACEBOOK!");
+                    }
+                },
+                error: function(user, error) {
+                    alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
+                }
+            });
         } else if (response.status === 'not_authorized') {
             alert("Usuário não está Autorizado para acessar.")
         } else {
