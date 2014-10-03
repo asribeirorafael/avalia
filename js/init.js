@@ -86,6 +86,7 @@ function salvarDado(){
     var FE = jQuery("#valFE").val();
 
     game.set("nome", N);
+
     game.set("valor", parseInt(V));
     game.set("faixa_etaria", FE);
 
