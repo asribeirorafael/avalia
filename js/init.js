@@ -23,24 +23,14 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function LoginParse(){
+function LoginSimpleParse(){
     var username = "default_exla";
     var password = "123456";
 
     if(!Parse.User.current()){
         Parse.User.logIn(username,password, {
             success: function(user) {
-                alert("Estamos logados via PARSE!Verificando se conta esta atrelada ao FACEBOOK.");
-                if (!Parse.FacebookUtils.isLinked(user)) {
-                    Parse.FacebookUtils.link(user, null, {
-                        success: function(user) {
-                            alert("Acesso por Facebook Liberado.");
-                        },
-                        error: function(user, error) {
-                            alert("Acesso Negado para o Usuário do Facebook.");
-                        }
-                    });
-                }
+                alert("Estamos logados via PARSE!");
             },
             error: function(user, error) {
                 alert("Você não possui acesso ao sistema.");
@@ -49,7 +39,29 @@ function LoginParse(){
     }else{
         alert("Usuário com sessão ativa no sistema, continuando.");
     }
+}
 
+function LoginFacebookParse(){
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+           alert("Usuário ja está logado no Sistema via FACEBOOK.");
+        } else if (response.status === 'not_authorized') {
+            alert("Usuário não está Autorizado para acessar.")
+        } else {
+            Parse.FacebookUtils.logIn(null, {
+                success: function(user) {
+                    if (!user.existed()) {
+                        alert("Usuário cadastrado e logado através do FACEBOOK!");
+                    } else {
+                        alert("Usuário conectado através do FACEBOOK!");
+                    }
+                },
+                error: function(user, error) {
+                    alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
+                }
+            });
+        }
+    });
 }
 
 function LogoutParse(user){
