@@ -50,10 +50,13 @@ function LoginFacebookParse(){
         Parse.FacebookUtils.logIn(null, {
             success: function(user) {
                 if (!user.existed()) {
+                    alert("Inserindo o usuario no sistema aguarde a liberação.")
                     jQuery("#btsnLogin").css("display","none");
                     jQuery("#cadastro").css("display","block");
                 } else {
                     alert("Usuário conectado através do FACEBOOK!");
+                    jQuery("#btsnLogin").css("display","none");
+                    jQuery("#cadastro").css("display","block");
                 }
             },
             error: function(user, error) {
