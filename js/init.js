@@ -43,17 +43,17 @@ function adicionarUserInRoles(){
     var Role = Parse.Object.extend("_Role");
 
     var queryUser = new Parse.Query(User);
-    var queryRole = new Parse.Query(Role);
+    var queryRole = new Parse.Query(Parse.Role);
 
     queryRole.equalTo("name", "Leitor");
     queryRole.find({
         success: function(roleReturn) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
-                    var roleACL = new Parse.ACL();
-                    var role = new Parse.Role("Leitor", roleACL);
+//                    var roleACL = new Parse.ACL();
+                    var role = new Parse.Role(roleName, roleACL);
                     role.getUsers().add(user);
-                    role.getRoles().add(roleReturn);
+                    role.getRoles().add(roleReturn[0]);
                     role.save();
                     alert("Salvo com Sucesso!");
                 },
