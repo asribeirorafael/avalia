@@ -51,7 +51,7 @@ function adicionarUserInRoles(){
         success: function(role) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
-                    role.relation("users").add(user);
+                    role.getUsers().add(user);
                     role.save(null, {useMasterKey:true});
 
                     alert("Salvo com Sucesso!");
