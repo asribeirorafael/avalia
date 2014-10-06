@@ -42,17 +42,16 @@ function adicionarUserInRoles(){
     var User = Parse.Object.extend("User");
 
     var queryUser = new Parse.Query(User);
-    var queryRole = new Parse.Query(Parse.Role);
+
+    queryRole = new Parse.Query(Parse.Role);
 
     queryRole.equalTo("name", "Leitor");
     queryRole.first({
         success: function(role) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
-                    var perfil = role;
-
-                    perfil.relation("users").add(user);
-                    perfil.save();
+                    role.relation.add(user);
+                    role.save();
 
                     alert("Salvo com Sucesso!");
                 },
