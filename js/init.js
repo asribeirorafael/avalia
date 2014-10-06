@@ -41,53 +41,55 @@ function adicionarRole(){
 function adicionarUserInRoles(){
 
     var User = Parse.Object.extend("User");
+    var Role = Parse.Object.extend("_Role");
 
     var queryUser = new Parse.Query(User);
+    var queryRole = new Parse.Query(Role);
 
-    queryRole = new Parse.Query(Parse.Role);
-
-    queryRole.equalTo("name", "Leitor");
-    queryRole.first({
-        success: function(role) {
-            queryUser.get("A6sgIWJZyD", {
-                success: function(user) {
-                    var arrayUser = new Array();
-                    arrayUser.push(user);
-
-                    role.getUsers().add(arrayUser);
-                    role.save(null, {useMasterKey:true});
-
-                    alert("Salvo com Sucesso!");
-                },
-                error: function(object, error) {
-                    alert("Retorno de Usuário com Problemas!");
-                }
-            });
-        }
-    });
-
-//    var queryRole = new Parse.Query(Role);
-
-//    queryRole.get("fMiCwlZw65", {
-//        success: function(roleR){
+//    queryRole = new Parse.Query(Parse.Role);
+//
+//    queryRole.equalTo("name", "Leitor");
+//    queryRole.first({
+//        success: function(role) {
 //            queryUser.get("A6sgIWJZyD", {
 //                success: function(user) {
-//                    var roleACL = new Parse.ACL();
-//                    var role = new Parse.Role("LeitorXx", roleACL);
-//                    role.getUsers().add(user);
-//                    role.getRoles().add(Parse.Role("Leitor", roleACL));
-//                    role.save();
+//                    var arrayUser = new Array();
+//                    arrayUser.push(user);
+//
+//                    role.getUsers().add(arrayUser);
+//                    role.save({useMasterKey:true});
+//
 //                    alert("Salvo com Sucesso!");
 //                },
 //                error: function(object, error) {
 //                    alert("Retorno de Usuário com Problemas!");
 //                }
 //            });
-//        },
-//        error: function(object, error){
-//            alert("Retorno de Role com Problemas!");
 //        }
 //    });
+
+//    var queryRole = new Parse.Query(Role);
+
+    queryRole.get("fMiCwlZw65", {
+        success: function(roleR){
+            queryUser.get("A6sgIWJZyD", {
+                success: function(user) {
+                    var roleACL = new Parse.ACL();
+                    var role = new Parse.Role("LeitorNew", roleACL);
+                    role.getUsers().add(user);
+                    role.getRoles().add(roleR);
+                    role.save();
+                    alert("Salvo com Sucesso!");
+                },
+                error: function(object, error) {
+                    alert("Retorno de Usuário com Problemas!");
+                }
+            });
+        },
+        error: function(object, error){
+            alert("Retorno de Role com Problemas!");
+        }
+    });
 
 //    queryRole.get("4pPDhFoo9R", {
 //        success: function(roleR){
