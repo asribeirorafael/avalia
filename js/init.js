@@ -39,6 +39,7 @@ function adicionarRole(){
 }
 
 function adicionarUserInRoles(){
+
     var User = Parse.Object.extend("User");
 
     var queryUser = new Parse.Query(User);
@@ -50,8 +51,8 @@ function adicionarUserInRoles(){
         success: function(role) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
-                    role.relation.add(user);
-                    role.save();
+                    role.relation("users").add(user);
+                    role.save(null, {useMasterKey:true});
 
                     alert("Salvo com Sucesso!");
                 },
