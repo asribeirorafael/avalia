@@ -38,6 +38,28 @@ function adicionarRole(){
     role2.save();
 }
 
+function adicionarUserInRoles2(){
+    var rolesQuery = new Parse.Query(Parse.Role);
+    rolesQuery.equalTo('name', 'Leitor');
+    return rolesQuery.first({useMasterKey:true})
+        .then(function(roleObject){
+            var User = Parse.Object.extend("User");
+            var queryUser = new Parse.Query(User);
+            queryUser.get("A6sgIWJZyD", {
+                success: function(user) {
+                    roleObject.getUsers().add(user);
+                    return roleObject.save(null, {useMasterKey:true});
+
+                    alert("Salvo com Sucesso!");
+                },
+                error: function(object, error) {
+                    alert("Retorno de Usuário com Problemas!");
+                }
+            });
+
+        });
+}
+
 function adicionarUserInRoles(){
     var User = Parse.Object.extend("User");
     var Role = Parse.Object.extend("_Role");
