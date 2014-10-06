@@ -50,8 +50,8 @@ function adicionarUserInRoles(){
         success: function(roleReturn) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
-//                    var roleACL = new Parse.ACL();
-                    var role = new Parse.Role(roleName, roleACL);
+                    var roleACL = new Parse.ACL();
+                    var role = new Parse.Role("Leitor", roleACL);
                     role.getUsers().add(user);
                     role.getRoles().add(roleReturn[0]);
                     role.save();
