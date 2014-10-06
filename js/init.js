@@ -43,16 +43,17 @@ function adicionarUserInRoles(){
     var Role = Parse.Object.extend("Role");
 
     var queryUser = new Parse.Query(User);
-//    var queryRole = new Parse.Query(Role);
+    var queryRole = new Parse.Query(Role);
 
-//    queryRole.get("fMiCwlZw65", {
-//        success: function(roleR){
+    queryRole.equalTo("name", "Leitor");
+    queryRole.find({
+        success: function(roleReturn) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user) {
                     var roleACL = new Parse.ACL();
-                    var role = new Parse.Role("LeitorXx", roleACL);
+                    var role = new Parse.Role("Leitor", roleACL);
                     role.getUsers().add(user);
-                    role.getRoles().add(Parse.Role("Leitor", roleACL));
+                    role.getRoles().add(roleReturn);
                     role.save();
                     alert("Salvo com Sucesso!");
                 },
@@ -60,6 +61,26 @@ function adicionarUserInRoles(){
                     alert("Retorno de Usuário com Problemas!");
                 }
             });
+        }
+    });
+
+//    var queryRole = new Parse.Query(Role);
+
+//    queryRole.get("fMiCwlZw65", {
+//        success: function(roleR){
+//            queryUser.get("A6sgIWJZyD", {
+//                success: function(user) {
+//                    var roleACL = new Parse.ACL();
+//                    var role = new Parse.Role("LeitorXx", roleACL);
+//                    role.getUsers().add(user);
+//                    role.getRoles().add(Parse.Role("Leitor", roleACL));
+//                    role.save();
+//                    alert("Salvo com Sucesso!");
+//                },
+//                error: function(object, error) {
+//                    alert("Retorno de Usuário com Problemas!");
+//                }
+//            });
 //        },
 //        error: function(object, error){
 //            alert("Retorno de Role com Problemas!");
