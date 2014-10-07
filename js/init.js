@@ -48,7 +48,7 @@ function adicionarUserInRoles(){
 
     var rolesQuery = new Parse.Query(Parse.Role);
     rolesQuery.equalTo('name', 'Administrador');
-    return rolesQuery.first({useMasterKey:true})
+    rolesQuery.first({useMasterKey:true})
         .then(function(roleObject) {
             queryUser.get("A6sgIWJZyD", {
                 success: function(user1) {
