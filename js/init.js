@@ -82,7 +82,7 @@ function adicionarUserInRoles(){
 //                    roleR.relation("users").add(user);
 
                     var user2 = new Parse.User();
-                    user2.id = user1.userId;
+                    user2.id = user1.id;
 
                     roleR.getUsers().add(user2);
 
