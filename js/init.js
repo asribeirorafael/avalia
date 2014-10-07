@@ -49,12 +49,18 @@ function adicionarUserInRoles(){
     queryRole.get("fMiCwlZw65", {
         success: function(roleR){
             queryUser.get("A6sgIWJZyD", {
-                success: function(user1) {
+                success: function(user) {
+//                    var roleACL = new Parse.ACL();
+//                    var role = new Parse.Role("Relacionamentos", roleACL);
+//                    role.getUsers().add(user);
+//                    role.getRoles().add(roleR);
 
-                    var user2 = new Parse.User();
-                    user2.id = user1.id;
+                    roleR.relation("users").add(user);
 
-                    roleR.getUsers().add(user2);
+//                    var user2 = new Parse.User();
+//                    user2.id = user1.id;
+//
+//                    roleR.getUsers().add(user2);
 
                     roleR.save(null, {useMasterKey:true});
 
