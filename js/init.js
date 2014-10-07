@@ -46,34 +46,20 @@ function adicionarUserInRoles(){
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
 
-//    queryRole = new Parse.Query(Parse.Role);
-//
-//    queryRole.equalTo("name", "Leitor");
-//    queryRole.first({
-//        success: function(role) {
+    var rolesQuery = new Parse.Query(Parse.Role);
+    rolesQuery.equalTo('name', 'Leitor');
+    return rolesQuery.first({useMasterKey:true})
+        .then(function(roleObject){
+            var user = new Parse.User();
+            user.id = req.params.userId;
+            roleObject.getUsers().add(user);
+            return roleObject.save(null, {useMasterKey:true});
+        });
+
+//    queryRole.get("fMiCwlZw65", {
+//        success: function(roleR){
 //            queryUser.get("A6sgIWJZyD", {
-//                success: function(user) {
-//                    var arrayUser = new Array();
-//                    arrayUser.push(user);
-//
-//                    role.getUsers().add(arrayUser);
-//                    role.save({useMasterKey:true});
-//
-//                    alert("Salvo com Sucesso!");
-//                },
-//                error: function(object, error) {
-//                    alert("Retorno de Usuário com Problemas!");
-//                }
-//            });
-//        }
-//    });
-
-//    var queryRole = new Parse.Query(Role);
-
-    queryRole.get("fMiCwlZw65", {
-        success: function(roleR){
-            queryUser.get("A6sgIWJZyD", {
-                success: function(user1) {
+//                success: function(user1) {
 //                    var roleACL = new Parse.ACL();
 //                    var role = new Parse.Role("Relacionamentos", roleACL);
 //                    role.getUsers().add(user);
@@ -81,33 +67,14 @@ function adicionarUserInRoles(){
 
 //                    roleR.relation("users").add(user);
 
-                    var user2 = new Parse.User();
-                    user2.id = user1.id;
-
-                    roleR.getUsers().add(user2);
-
-                    roleR.save(null, {useMasterKey:true});
-
-                    alert("Salvo com Sucesso!");
-                },
-                error: function(object, error) {
-                    alert("Retorno de Usuário com Problemas!");
-                }
-            });
-        },
-        error: function(object, error){
-            alert("Retorno de Role com Problemas!");
-        }
-    });
-
-//    queryRole.get("4pPDhFoo9R", {
-//        success: function(roleR){
-//            queryUser.get("ihIMmAHDBT", {
-//                success: function(user) {
-//                    var role = new Parse.Role("Administrador", roleACL);
-//                    role.getUsers().add(user);
-//                    role.getRoles().add(roleR);
-//                    role.save();
+//                    var user2 = new Parse.User();
+//                    user2.id = user1.id;
+//
+//                    roleR.getUsers().add(user2);
+//
+//                    roleR.save(null, {useMasterKey:true});
+//
+//                    alert("Salvo com Sucesso!");
 //                },
 //                error: function(object, error) {
 //                    alert("Retorno de Usuário com Problemas!");
