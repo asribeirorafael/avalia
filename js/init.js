@@ -40,39 +40,13 @@ function adicionarRole(){
 
 function adicionarUserInRoles(){
 
+    Parse.initialize("LOhTWWFFtKEhzuBpX9IOQKzXQvN0d2fOW4zfamRs", "0mlWdmo9HQdeoAkDCzDKx0RJirGxloMAdH7cEggr");
+
     var User = Parse.Object.extend("User");
     var Role = Parse.Object.extend("_Role");
 
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
-
-//    var rolesQuery = new Parse.Query(Parse.Role);
-//    rolesQuery.equalTo('name', 'Administrador');
-//    return rolesQuery.first({useMasterKey:true})
-//        .then(function(roleObject){
-//            queryUser.get("jFxZYWIHAP", {
-//                success: function(user1) {
-////                    var roleACL = new Parse.ACL();
-////                    var role = new Parse.Role("Relacionamentos", roleACL);
-////                    role.getUsers().add(user);
-////                    role.getRoles().add(roleR);
-//
-////                    roleR.relation("users").add(user);
-//
-//                    var user2 = new Parse.User();
-//                    user2.id = user1.id;
-//
-//                    roleR.getUsers().add(user2);
-//
-//                    roleR.save(null, {useMasterKey:true});
-//
-//                    alert("Salvo com Sucesso!");
-//                },
-//                error: function(object, error) {
-//                    alert("Retorno de Usuário com Problemas!");
-//                }
-//            });
-//        });
 
     queryRole.get("ZI3tfbi5w3", {
         success: function(roleR){
@@ -90,7 +64,7 @@ function adicionarUserInRoles(){
 
                     roleR.getUsers().add(user2);
 
-                    roleR.save(null, {useMasterKey:true});
+                    roleR.save();
 
                     alert("Salvo com Sucesso!");
                 },
