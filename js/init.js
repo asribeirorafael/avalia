@@ -50,7 +50,7 @@ function adicionarUserInRoles(){
     rolesQuery.equalTo('name', 'Administrador');
     return rolesQuery.first({useMasterKey:true})
         .then(function(roleObject){
-            queryUser.get("A6sgIWJZyD", {
+            queryUser.get("jFxZYWIHAP", {
                 success: function(user1) {
 //                    var roleACL = new Parse.ACL();
 //                    var role = new Parse.Role("Relacionamentos", roleACL);
