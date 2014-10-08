@@ -34,7 +34,7 @@ function adicionarRole(){
 
     var roleACL2 = new Parse.ACL();
     roleACL2.setPublicReadAccess(true);
-    roleACL.setPublicWriteAccess(true);
+    roleACL2.setPublicWriteAccess(true);
     var role2 = new Parse.Role("Leitor", roleACL2);
     role2.save();
 }
