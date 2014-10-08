@@ -40,7 +40,7 @@ function adicionarRole(){
 
 function adicionarUserInRoles(){
 
-    var User = Parse.Object.extend("_User");
+    var User = Parse.Object.extend("User");
     var Role = Parse.Object.extend("_Role");
 
     var queryUser = new Parse.Query(User);
