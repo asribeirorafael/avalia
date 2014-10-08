@@ -49,9 +49,9 @@ function adicionarUserInRoles(){
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
 
-    queryRole.get("Hf4ehwt3bK", {
+    queryRole.get("Ji1y7vQB9E", {
         success: function(roleR){
-            queryUser.get("jFxZYWIHAP", {
+            queryUser.get("1QQqZuRor8", {
                 success: function(user1) {
 //                    var roleACL = new Parse.ACL();
 //                    var role = new Parse.Role("Relacionamentos", roleACL);
