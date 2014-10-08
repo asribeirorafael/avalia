@@ -41,12 +41,12 @@ function adicionarRole(){
 function adicionarUserInRoles(){
 
     var User = Parse.Object.extend("User");
-    var Role = Parse.Object.extend("Role");
+//    var Role = Parse.Object.extend("Role");
 
     var queryUser = new Parse.Query(User);
 //    var queryRole = new Parse.Query(Role);
 
-    var rolesQuery = new Parse.Query(Role);
+    var rolesQuery = new Parse.Query(Parse.Role);
     rolesQuery.equalTo('name', 'Administrador');
     return rolesQuery.first({useMasterKey:true})
         .then(function(roleObject){
