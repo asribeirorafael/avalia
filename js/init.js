@@ -38,20 +38,18 @@ function adicionarRole(){
     role2.save();
 }
 
-function adicionarUserInRoles(){
+function adicionarUserInRoles() {
 
     var User = Parse.Object.extend("User");
-//    var Role = Parse.Object.extend("Role");
+    var Role = Parse.Object.extend("_Role");
 
     var queryUser = new Parse.Query(User);
-//    var queryRole = new Parse.Query(Role);
+    var queryRole = new Parse.Query(Role);
 
-    var rolesQuery = new Parse.Query(Parse.Role);
-    rolesQuery.equalTo('name', 'Administrador');
-    rolesQuery.first({useMasterKey:true})
-        .then(function(roleObject) {
+    queryRole.get("fMiCwlZw65", {
+        success: function (roleR) {
             queryUser.get("A6sgIWJZyD", {
-                success: function(user1) {
+                success: function (user1) {
 //                    var roleACL = new Parse.ACL();
 //                    var role = new Parse.Role("Relacionamentos", roleACL);
 //                    role.getUsers().add(user);
@@ -62,49 +60,22 @@ function adicionarUserInRoles(){
                     var user2 = new Parse.User();
                     user2.id = user1.id;
 
-                    roleObject.getUsers().add(user2);
+                    roleR.getUsers().add(user2);
 
-                    roleObject.save(null, {useMasterKey:true});
+                    roleR.save();
 
                     alert("Salvo com Sucesso!");
                 },
-                error: function(object, error) {
+                error: function (object, error) {
                     alert("Retorno de Usuário com Problemas!");
                 }
             });
-        });
-
-//    queryRole.get("fMiCwlZw65", {
-//        success: function(roleR){
-//            queryUser.get("A6sgIWJZyD", {
-//                success: function(user1) {
-////                    var roleACL = new Parse.ACL();
-////                    var role = new Parse.Role("Relacionamentos", roleACL);
-////                    role.getUsers().add(user);
-////                    role.getRoles().add(roleR);
-//
-////                    roleR.relation("users").add(user);
-//
-//                    var user2 = new Parse.User();
-//                    user2.id = user1.id;
-//
-//                    roleR.getUsers().add(user2);
-//
-//                    roleR.save(null, {useMasterKey:true});
-//
-//                    alert("Salvo com Sucesso!");
-//                },
-//                error: function(object, error) {
-//                    alert("Retorno de Usuário com Problemas!");
-//                }
-//            });
-//        },
-//        error: function(object, error){
-//            alert("Retorno de Role com Problemas!");
-//        }
-//    });
+        },
+        error: function (object, error) {
+            alert("Retorno de Role com Problemas!");
+        }
+    });
 }
-
 
 function LoginSimpleParse(){
     var username = "default_exla";
