@@ -38,18 +38,18 @@ function adicionarRole(){
     role2.save();
 }
 
-function adicionarUserInRoles() {
+function adicionarUserInRoles(){
 
     var User = Parse.Object.extend("User");
-    var Role = Parse.Object.extend("_Role");
+    var Role = Parse.Object.extend("Role");
 
     var queryUser = new Parse.Query(User);
     var queryRole = new Parse.Query(Role);
 
     queryRole.get("fMiCwlZw65", {
-        success: function (roleR) {
+        success: function(roleR){
             queryUser.get("A6sgIWJZyD", {
-                success: function (user1) {
+                success: function(user1) {
 //                    var roleACL = new Parse.ACL();
 //                    var role = new Parse.Role("Relacionamentos", roleACL);
 //                    role.getUsers().add(user);
@@ -62,20 +62,21 @@ function adicionarUserInRoles() {
 
                     roleR.getUsers().add(user2);
 
-                    roleR.save();
+                    roleR.save(null, {useMasterKey:true});
 
                     alert("Salvo com Sucesso!");
                 },
-                error: function (object, error) {
+                error: function(object, error) {
                     alert("Retorno de Usuário com Problemas!");
                 }
             });
         },
-        error: function (object, error) {
+        error: function(object, error){
             alert("Retorno de Role com Problemas!");
         }
     });
 }
+
 
 function LoginSimpleParse(){
     var username = "default_exla";
