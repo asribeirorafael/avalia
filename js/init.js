@@ -28,12 +28,13 @@ function adicionarRole(){
     // By specifying no write privileges for the ACL, we can ensure the role cannot be altered.
     var roleACL = new Parse.ACL();
     roleACL.setPublicReadAccess(true);
-    roleACL.setPublicWriteAccess(true)
+    roleACL.setPublicWriteAccess(true);
     var role = new Parse.Role("Administrador", roleACL);
     role.save();
 
     var roleACL2 = new Parse.ACL();
     roleACL2.setPublicReadAccess(true);
+    roleACL.setPublicWriteAccess(true);
     var role2 = new Parse.Role("Leitor", roleACL2);
     role2.save();
 }
