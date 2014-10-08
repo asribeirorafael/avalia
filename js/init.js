@@ -53,12 +53,6 @@ function adicionarUserInRoles(){
         success: function(roleR){
             queryUser.get("1QQqZuRor8", {
                 success: function(user1) {
-//                    var roleACL = new Parse.ACL();
-//                    var role = new Parse.Role("Relacionamentos", roleACL);
-//                    role.getUsers().add(user);
-//                    role.getRoles().add(roleR);
-
-//                    roleR.relation("users").add(user);
 
                     var user2 = new Parse.User();
                     user2.id = user1.id;
