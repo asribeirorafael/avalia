@@ -146,6 +146,9 @@ function createGames(){
     gameSend.save(null, {
         success: function(gameScore) {
             console.log("Create executado com sucesso.");
+            jQuery("#valNG").val("");
+            jQuery("#valVL").val("");
+            jQuery("#valFE").val("");
             readGames();
         },
         error: function(gameScore, error) {
@@ -168,7 +171,7 @@ function readGames(){
             $("#collectionGames").html('<table id="tableGames" style="border: 1px solid #000;"><tr><td style="border: 1px solid #000;"><strong>Nome</strong></td><td style="border: 1px solid #000;"><strong>Valor</strong></td><td style="border: 1px solid #000;"><strong>Faixa Etária</strong></td><td>&nbsp</td></tr></table>');
 
             for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
-                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='loadUpdateGames("+j+")'/></td></tr>");
+                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Selecionar' onclick='loadUpdateGames("+j+")'/></td></tr>");
             }
 
             localStorage.setItem("ListaGames", JSON.stringify(arrayGames));
@@ -186,26 +189,32 @@ function updateGames(){
     var gameFront = new game;
     var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
 
-    gameFront.nome = jQuery("#valNG").val();
-    gameFront.valor = jQuery("#valVL").val();
-    gameFront.faixaEtaria = jQuery("#valFE").val();
+    if(gameArmazenado.id){
+        gameFront.nome = jQuery("#valNG").val();
+        gameFront.valor = jQuery("#valVL").val();
+        gameFront.faixaEtaria = jQuery("#valFE").val();
 
-    gameBack.id = gameArmazenado.id;
+        gameBack.id = gameArmazenado.id;
 
-    var gameSend = setObjectBase(gameBack, gameFront);
+        var gameSend = setObjectBase(gameBack, gameFront);
 
-    gameSend.save(null, {
-        success: function(gameScore) {
-            console.log("Update realizado com sucesso");
-            jQuery("#valNG").val("");
-            jQuery("#valVL").val("");
-            jQuery("#valFE").val("");
-            readGames();
-        },
-        error: function(gameScore, error) {
-            console.log("Update falhou. Erro: " + error.message);
-        }
-    });
+        gameSend.save(null, {
+            success: function(gameScore) {
+                console.log("Update realizado com sucesso");
+                jQuery("#valNG").val("");
+                jQuery("#valVL").val("");
+                jQuery("#valFE").val("");
+                localStorage.setItem("Game", null);
+                readGames();
+            },
+            error: function(gameScore, error) {
+                console.log("Update falhou. Erro: " + error.message);
+            }
+        });
+    }else{
+        alert("Selecione um Game para fazer Update.")
+    }
+
 }
 
 function deleteGames(){
@@ -216,18 +225,24 @@ function deleteGames(){
 
     gameBack.id = gameArmazenado.id;
 
-    gameBack.destroy({
-        success: function(gameScore) {
-            console.log("Delete realizado com sucesso");
-            jQuery("#valNG").val("");
-            jQuery("#valVL").val("");
-            jQuery("#valFE").val("");
-            readGames();
-        },
-        error: function(gameScore, error) {
-            console.log("Delete falhou. Erro: " + error.message);
-        }
-    });
+    if(gameBack.id){
+        gameBack.destroy({
+            success: function(gameScore) {
+                console.log("Delete realizado com sucesso");
+                jQuery("#valNG").val("");
+                jQuery("#valVL").val("");
+                jQuery("#valFE").val("");
+                localStorage.setItem("Game", null);
+                readGames();
+            },
+            error: function(gameScore, error) {
+                console.log("Delete falhou. Erro: " + error.message);
+            }
+        });
+    }else{
+        alert("Selecione um Game para fazer Delete.")
+    }
+
 }
 
 //EVENTOS
