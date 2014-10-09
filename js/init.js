@@ -226,9 +226,8 @@ function deleteGames(){
     var gameFront = new game;
     var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
 
-    gameBack.id = gameArmazenado.id;
-
-    if(gameBack){
+    if(gameArmazenado){
+        gameBack.id = gameArmazenado.id;
         gameBack.destroy({
             success: function(gameScore) {
                 console.log("Delete realizado com sucesso");
