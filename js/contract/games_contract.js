@@ -2,7 +2,7 @@
  * Created by rafae_000 on 09/10/2014.
  */
 
-var game = function(){
+var game = function game(){
     this.id = "";
     this.nome = "";
     this.valor = null;
@@ -10,7 +10,7 @@ var game = function(){
 }
 
 function setObjectFront(objetoBase){
-    var objetoFront = new game();
+    var objetoFront = new game;
 
     objetoFront.id = objetoBase.id;
     objetoFront.nome = objetoBase.get("nome");
