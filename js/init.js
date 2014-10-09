@@ -182,6 +182,7 @@ function readGames(){
 
 function updateGames(){
     var Game = Parse.Object.extend("Games");
+    var gameBack = new Game();
     var gameFront = new game;
     var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
 
@@ -189,7 +190,9 @@ function updateGames(){
     gameFront.valor = jQuery("#valVL").val();
     gameFront.faixaEtaria = jQuery("#valFE").val();
 
-    var gameSend = setObjectBase(gameArmazenado, gameFront);
+    gameBack.id = gameArmazenado.id;
+
+    var gameSend = setObjectBase(gameBack, gameFront);
 
     gameSend.save(null, {
         success: function(gameScore) {
