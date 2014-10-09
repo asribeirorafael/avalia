@@ -149,12 +149,13 @@ function createGames(){
     game.save(null, {
         success: function(gameScore) {
             // Execute any logic that should take place after the object is saved.
-            alert('New object created with objectId: ' + gameScore.id);
+            console.log('New object created with objectId: ' + gameScore.id);
+            readGames();
         },
         error: function(gameScore, error) {
             // Execute any logic that should take place if the save fails.
             // error is a Parse.Error with an error code and message.
-            alert('Failed to create new object, with error code: ' + error.message);
+            console.log('Failed to create new object, with error code: ' + error.message);
         }
     });
 }
@@ -173,7 +174,7 @@ function readGames(){
             $("#collectionGames").html('<table id="tableGames" style="border: 1px solid #000;"><tr><td style="border: 1px solid #000;"><strong>Nome</strong></td><td style="border: 1px solid #000;"><strong>Valor</strong></td><td style="border: 1px solid #000;"><strong>Faixa Etária</strong></td></tr></table>');
 
             for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
-                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td></tr>");
+                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='console.log(this)'/></td></tr>");
             }
             console.log(arrayGames);
         },
