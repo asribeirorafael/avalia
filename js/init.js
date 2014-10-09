@@ -165,9 +165,13 @@ function readGames(){
     query.find({
         success: function(listaGames) {
             var arrayGames = new Array();
-            for(var i = 0, lenG = listaGames.length; i< lenG; i++){
+            for(var i = 0, lenG = listaGames.length; i < lenG; i++){
                 var game = setObjectFront(listaGames[i]);
                 arrayGames.push(game);
+            }
+
+            for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
+                $("#tableGames").append("<tr><td><strong>"+arrayGames[i].nome+"</strong></td><td><strong>"+arrayGames[i].valor+"</strong></td><td><strong>"+arrayGames[i].faixaEtaria+"</strong></td></tr>");
             }
             console.log(arrayGames);
         },
