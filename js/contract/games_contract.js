@@ -14,7 +14,7 @@ function setObjectFront(objetoBase){
 
     objetoFront.id = objetoBase.id;
     objetoFront.nome = objetoBase.get("nome");
-    objetoFront.valor = objetoBase.get("valor");
+    objetoFront.valor = parseFloat(objetoBase.get("valor"));
     objetoFront.faixaEtaria = objetoBase.get("faixa_etaria");
 
     return objetoFront;
@@ -23,7 +23,7 @@ function setObjectFront(objetoBase){
 function setObjectBase(objetoBase, objetoFront){
 
     objetoBase.set("nome", objetoFront.nome);
-    objetoBase.set("valor", objetoFront.valor);
+    objetoBase.set("valor", parseFloat(objetoFront.valor));
     objetoBase.set("faixa_etaria", objetoFront.faixaEtaria);
 
     return objetoBase;

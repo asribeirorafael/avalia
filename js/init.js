@@ -135,27 +135,21 @@ function LogoutParse(user){
 //CRUD - CREATE, READ, UPDATE, DELETE
 function createGames(){
     var Game = Parse.Object.extend("Games");
-    var game = new Game();
+    var gameFront = new game;
 
-    var N = jQuery("#valNG").val();
-    var V = jQuery("#valVL").val();
-    var FE = jQuery("#valFE").val();
+    gameFront.nome = jQuery("#valNG").val();
+    gameFront.valor = jQuery("#valVL").val();
+    gameFront.faixaEtaria = jQuery("#valFE").val();
 
-    game.set("nome", N);
+    var gameSend = setObjectBase(new Game(), gameFront);
 
-    game.set("valor", parseInt(V));
-    game.set("faixa_etaria", FE);
-
-    game.save(null, {
+    gameSend.save(null, {
         success: function(gameScore) {
-            // Execute any logic that should take place after the object is saved.
-            console.log('New object created with objectId: ' + gameScore.id);
+            console.log("Create executado com sucesso.");
             readGames();
         },
         error: function(gameScore, error) {
-            // Execute any logic that should take place if the save fails.
-            // error is a Parse.Error with an error code and message.
-            console.log('Failed to create new object, with error code: ' + error.message);
+            console.log("Create falhou. Erro: "+ error.message);
         }
     });
 }
@@ -174,13 +168,48 @@ function readGames(){
             $("#collectionGames").html('<table id="tableGames" style="border: 1px solid #000;"><tr><td style="border: 1px solid #000;"><strong>Nome</strong></td><td style="border: 1px solid #000;"><strong>Valor</strong></td><td style="border: 1px solid #000;"><strong>Faixa Etária</strong></td><td>&nbsp</td></tr></table>');
 
             for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
-                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='console.log("+j+")'/></td></tr>");
+                $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='loadUpdateGames("+j+")'/></td></tr>");
             }
-            console.log(arrayGames);
+
+            localStorage.setItem("ListaGames", arrayGames);
 
         },
         error: function(object, error) {
             console.log("Ocorreu um erro: "+error);
         }
     });
+}
+
+function updateGames(){
+    var Game = Parse.Object.extend("Games");
+    var gameFront = new game;
+    var gameArmazenado = localStorage.getItem("Game");
+
+    gameFront.nome = jQuery("#valNG").val();
+    gameFront.valor = jQuery("#valVL").val();
+    gameFront.faixaEtaria = jQuery("#valFE").val();
+
+    var gameSend = setObjectBase(gameArmazenado, gameFront);
+
+    gameSend.save(null, {
+        success: function(gameScore) {
+            console.log("Update realizado com sucesso");
+            readGames();
+        },
+        error: function(gameScore, error) {
+            console.log("Update falhou. Erro: " + error.message);
+        }
+    });
+}
+
+//EVENTOS
+
+function loadUpdateGames(e){
+    var arrayGames = localStorage.getItem("ListaGames");
+
+    jQuery("#valNG").val(arrayGames[e].nome);
+    jQuery("#valVL").val(arrayGames[e].valor);
+    jQuery("#valFE").val(arrayGames[e].faixaEtaria);
+
+    localStorage.setItem("Game",arrayGames[e]);
 }
