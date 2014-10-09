@@ -4,7 +4,10 @@
 
 Parse.initialize("LOhTWWFFtKEhzuBpX9IOQKzXQvN0d2fOW4zfamRs", "0mlWdmo9HQdeoAkDCzDKx0RJirGxloMAdH7cEggr");
 
-window.fbAsyncInit = function() {
+localStorage.setItem("Game", null);
+localStorage.setItem("ListaGames", null);
+
+    window.fbAsyncInit = function() {
     Parse.FacebookUtils.init({
         appId      : '361738637322502',
 //        status     : false, // check Facebook Login status
