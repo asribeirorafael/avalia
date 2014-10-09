@@ -24,6 +24,8 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
+//PROCESSO DE CRIAR ROLES E ADICIONAR USUÁRIOS EM ROLES
 function adicionarRole(){
     // By specifying no write privileges for the ACL, we can ensure the role cannot be altered.
     var roleACL = new Parse.ACL();
@@ -75,6 +77,7 @@ function adicionarUserInRoles(){
 }
 
 
+//LOGIN VIA CADASTRO, FACEBOOK E LOGOUT
 function LoginSimpleParse(){
     var username = "default_exla";
     var password = "123456";
@@ -86,11 +89,11 @@ function LoginSimpleParse(){
                 jQuery("#cadastro").css("display","block");
             },
             error: function(user, error) {
-                alert("Você não possui acesso ao sistema.");
+                console.log("Você não possui acesso ao sistema.");
             }
         });
     }else{
-        alert("Usuário com sessão ativa no sistema, continuando.");
+        console.log("Usuário com sessão ativa no sistema, continuando.");
         jQuery("#btsnLogin").css("display","none");
         jQuery("#cadastro").css("display","block");
     }
@@ -101,21 +104,21 @@ function LoginFacebookParse(){
         Parse.FacebookUtils.logIn(null, {
             success: function(user) {
                 if (!user.existed()) {
-                    alert("Inserindo o usuario no sistema aguarde a liberação.")
+                    console.log("Inserindo o usuario no sistema aguarde a liberação.")
                     jQuery("#btsnLogin").css("display","none");
                     jQuery("#cadastro").css("display","block");
                 } else {
-                    alert("Usuário conectado através do FACEBOOK!");
+                    console.log("Usuário conectado através do FACEBOOK!");
                     jQuery("#btsnLogin").css("display","none");
                     jQuery("#cadastro").css("display","block");
                 }
             },
             error: function(user, error) {
-                alert("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
+                console.log("O usuário cancelou o login do Facebook ou não autorizar totalmente.");
             }
         });
     }else{
-        alert("Usuário com sessão ativa no sistema, continuando.");
+        console.log("Usuário com sessão ativa no sistema, continuando.");
         jQuery("#btsnLogin").css("display","none");
         jQuery("#cadastro").css("display","block");
     }
@@ -125,11 +128,12 @@ function LogoutParse(user){
     Parse.User.logOut();
     jQuery("#btsnLogin").css("display","block");
     jQuery("#cadastro").css("display","none");
-    alert("Usuário desconectado do Sistema.")
+    console.log("Usuário desconectado do Sistema.")
 }
 
 
-function salvarDado(){
+//CRUD - CREATE, READ, UPDATE, DELETE
+function createGames(){
     var Game = Parse.Object.extend("Games");
     var game = new Game();
 
@@ -151,6 +155,19 @@ function salvarDado(){
             // Execute any logic that should take place if the save fails.
             // error is a Parse.Error with an error code and message.
             alert('Failed to create new object, with error code: ' + error.message);
+        }
+    });
+}
+
+function readGames(){
+    var query = new Parse.Query("Games");
+
+    query.find({
+        success: function(listaGames) {
+            console.log(listaGames);
+        },
+        error: function(object, error) {
+            console.log("Ocorreu um erro: "+error);
         }
     });
 }
