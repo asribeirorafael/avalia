@@ -171,7 +171,7 @@ function readGames(){
                 $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='loadUpdateGames("+j+")'/></td></tr>");
             }
 
-            localStorage.setItem("ListaGames", arrayGames);
+            localStorage.setItem("ListaGames", JSON.stringify(arrayGames));
 
         },
         error: function(object, error) {
@@ -183,7 +183,7 @@ function readGames(){
 function updateGames(){
     var Game = Parse.Object.extend("Games");
     var gameFront = new game;
-    var gameArmazenado = localStorage.getItem("Game");
+    var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
 
     gameFront.nome = jQuery("#valNG").val();
     gameFront.valor = jQuery("#valVL").val();
@@ -194,6 +194,9 @@ function updateGames(){
     gameSend.save(null, {
         success: function(gameScore) {
             console.log("Update realizado com sucesso");
+            jQuery("#valNG").val("");
+            jQuery("#valVL").val("");
+            jQuery("#valFE").val("");
             readGames();
         },
         error: function(gameScore, error) {
@@ -205,11 +208,11 @@ function updateGames(){
 //EVENTOS
 
 function loadUpdateGames(e){
-    var arrayGames = localStorage.getItem("ListaGames");
+    var arrayGames = JSON.parse(localStorage.getItem("ListaGames"));
 
     jQuery("#valNG").val(arrayGames[e].nome);
     jQuery("#valVL").val(arrayGames[e].valor);
     jQuery("#valFE").val(arrayGames[e].faixaEtaria);
 
-    localStorage.setItem("Game",arrayGames[e]);
+    localStorage.setItem("Game", JSON.stringify(arrayGames[e]));
 }
