@@ -177,6 +177,7 @@ function readGames(){
                 $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='console.log("+i+")'/></td></tr>");
             }
             console.log(arrayGames);
+
         },
         error: function(object, error) {
             console.log("Ocorreu um erro: "+error);
