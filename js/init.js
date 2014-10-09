@@ -171,7 +171,7 @@ function readGames(){
                 arrayGames.push(game);
             }
 
-            $("#collectionGames").html('<table id="tableGames" style="border: 1px solid #000;"><tr><td style="border: 1px solid #000;"><strong>Nome</strong></td><td style="border: 1px solid #000;"><strong>Valor</strong></td><td style="border: 1px solid #000;"><strong>Faixa Etária</strong></td><td></td></tr></table>');
+            $("#collectionGames").html('<table id="tableGames" style="border: 1px solid #000;"><tr><td style="border: 1px solid #000;"><strong>Nome</strong></td><td style="border: 1px solid #000;"><strong>Valor</strong></td><td style="border: 1px solid #000;"><strong>Faixa Etária</strong></td><td>&nbsp</td></tr></table>');
 
             for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
                 $("#tableGames").append("<tr style='border: 1px solid #000;'><td>"+arrayGames[j].nome+"</td><td>"+arrayGames[j].valor+"</td><td>"+arrayGames[j].faixaEtaria+"</td><td><input type='button' value='Editar' onclick='console.log(this)'/></td></tr>");
