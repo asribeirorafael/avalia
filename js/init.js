@@ -164,7 +164,12 @@ function readGames(){
 
     query.find({
         success: function(listaGames) {
-            console.log(listaGames);
+            var arrayGames = new Array();
+            for(var i = 0, lenG = listaGames.length; i< lenG; i++){
+                var game = setObjectFront(listaGames[i]);
+                arrayGames.push(game);
+            }
+            console.log(arrayGames);
         },
         error: function(object, error) {
             console.log("Ocorreu um erro: "+error);
