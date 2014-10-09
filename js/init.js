@@ -192,7 +192,7 @@ function updateGames(){
     var gameFront = new game;
     var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
 
-    if(gameArmazenado.id){
+    if(gameArmazenado){
         gameFront.nome = jQuery("#valNG").val();
         gameFront.valor = jQuery("#valVL").val();
         gameFront.faixaEtaria = jQuery("#valFE").val();
@@ -228,7 +228,7 @@ function deleteGames(){
 
     gameBack.id = gameArmazenado.id;
 
-    if(gameBack.id){
+    if(gameBack){
         gameBack.destroy({
             success: function(gameScore) {
                 console.log("Delete realizado com sucesso");
