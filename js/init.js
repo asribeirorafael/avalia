@@ -171,7 +171,7 @@ function readGames(){
             }
 
             for(var j = 0, lenAG = arrayGames.length; j < lenAG; j++){
-                $("#tableGames").append("<tr><td><strong>"+arrayGames[i].nome+"</strong></td><td><strong>"+arrayGames[i].valor+"</strong></td><td><strong>"+arrayGames[i].faixaEtaria+"</strong></td></tr>");
+                $("#tableGames").append("<tr><td><strong>"+arrayGames[j].nome+"</strong></td><td><strong>"+arrayGames[j].valor+"</strong></td><td><strong>"+arrayGames[j].faixaEtaria+"</strong></td></tr>");
             }
             console.log(arrayGames);
         },
