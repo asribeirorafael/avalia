@@ -208,6 +208,28 @@ function updateGames(){
     });
 }
 
+function deleteGames(){
+    var Game = Parse.Object.extend("Games");
+    var gameBack = new Game();
+    var gameFront = new game;
+    var gameArmazenado = JSON.parse(localStorage.getItem("Game"));
+
+    gameBack.id = gameArmazenado.id;
+
+    gameBack.destroy({
+        success: function(gameScore) {
+            console.log("Delete realizado com sucesso");
+            jQuery("#valNG").val("");
+            jQuery("#valVL").val("");
+            jQuery("#valFE").val("");
+            readGames();
+        },
+        error: function(gameScore, error) {
+            console.log("Delete falhou. Erro: " + error.message);
+        }
+    });
+}
+
 //EVENTOS
 
 function loadUpdateGames(e){
