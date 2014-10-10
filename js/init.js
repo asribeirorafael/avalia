@@ -88,8 +88,8 @@ function LoginSimpleParse(){
     if(!Parse.User.current()){
         Parse.User.logIn(username,password, {
             success: function(user) {
-                jQuery("#btsnLogin").css("display","none");
-                jQuery("#cadastro").css("display","block");
+//                jQuery("#btsnLogin").css("display","none");
+//                jQuery("#cadastro").css("display","block");
             },
             error: function(user, error) {
                 console.log("Você não possui acesso ao sistema.");
@@ -97,8 +97,8 @@ function LoginSimpleParse(){
         });
     }else{
         console.log("Usuário com sessão ativa no sistema, continuando.");
-        jQuery("#btsnLogin").css("display","none");
-        jQuery("#cadastro").css("display","block");
+//        jQuery("#btsnLogin").css("display","none");
+//        jQuery("#cadastro").css("display","block");
     }
 }
 
@@ -108,12 +108,12 @@ function LoginFacebookParse(){
             success: function(user) {
                 if (!user.existed()) {
                     console.log("Inserindo o usuario no sistema aguarde a liberação.")
-                    jQuery("#btsnLogin").css("display","none");
-                    jQuery("#cadastro").css("display","block");
+//                    jQuery("#btsnLogin").css("display","none");
+//                    jQuery("#cadastro").css("display","block");
                 } else {
                     console.log("Usuário conectado através do FACEBOOK!");
-                    jQuery("#btsnLogin").css("display","none");
-                    jQuery("#cadastro").css("display","block");
+//                    jQuery("#btsnLogin").css("display","none");
+//                    jQuery("#cadastro").css("display","block");
                 }
             },
             error: function(user, error) {
@@ -122,15 +122,15 @@ function LoginFacebookParse(){
         });
     }else{
         console.log("Usuário com sessão ativa no sistema, continuando.");
-        jQuery("#btsnLogin").css("display","none");
-        jQuery("#cadastro").css("display","block");
+//        jQuery("#btsnLogin").css("display","none");
+//        jQuery("#cadastro").css("display","block");
     }
 }
 
 function LogoutParse(user){
     Parse.User.logOut();
-    jQuery("#btsnLogin").css("display","block");
-    jQuery("#cadastro").css("display","none");
+//    jQuery("#btsnLogin").css("display","block");
+//    jQuery("#cadastro").css("display","none");
     console.log("Usuário desconectado do Sistema.")
 }
 
