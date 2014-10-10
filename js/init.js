@@ -258,3 +258,16 @@ function loadUpdateGames(e){
 
     localStorage.setItem("Game", JSON.stringify(arrayGames[e]));
 }
+
+//CLOUD CODE
+
+function getFirstCloudCode(){
+    Parse.Cloud.run('hello', {}, {
+        success: function(result) {
+            console.log(result)
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
