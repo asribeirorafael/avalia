@@ -262,12 +262,13 @@ function loadUpdateGames(e){
 //CLOUD CODE
 
 function getFirstCloudCode(){
-    Parse.Cloud.run('hello', {}, {
-        success: function(result) {
-            console.log(result)
+    Parse.Cloud.run('averageStars', { movie: 'The Matrix' }, {
+        success: function(ratings) {
+            // ratings should be 4.5
+            console.log("Avaliação: "+ratings);
         },
         error: function(error) {
-            console.log(error);
+            console.log("Erro: "+error);
         }
     });
 }
